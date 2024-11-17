@@ -1,45 +1,61 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+export default function Layout() {
+    return (
+        <Tabs>
+            <Tabs.Screen
+                name="home"
+                options={
+                    {
+                        tabBarLabel: "Home",
+                        tabBarLabelStyle: { color: "#7CB9E8" },
+                        headerShown: false,
+                        tabBarIcon: ({ focused }) =>
+                            focused ? (
+                                <FontAwesome name='tasks' size={24} color="#7CB9E8" />
+                            ) : (
+                                <FontAwesome name='tasks' size={24} color="black" />
+                            )
+                    }
+                }
+            />
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+            <Tabs.Screen
+                name="calendar"
+                options={
+                    {
+                        tabBarLabel: "Calendar",
+                        tabBarLabelStyle: { color: "#7CB9E8" },
+                        headerShown: false,
+                        tabBarIcon: ({ focused }) =>
+                            focused ? (
+                                <AntDesign name='calendar' size={24} color="#7CB9E8" />
+                            ) : (
+                                <AntDesign name='calendar' size={24} color="black" />
+                            )
+                    }
+                }
+            />
 
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+            <Tabs.Screen
+                name="profile"
+                options={
+                    {
+                        tabBarLabel: "Profile",
+                        tabBarLabelStyle: { color: "#7CB9E8" },
+                        headerShown: false,
+                        tabBarIcon: ({ focused }) =>
+                            focused ? (
+                                <MaterialCommunityIcons name='account-details' size={24} color="#7CB9E8" />
+                            ) : (
+                                <MaterialCommunityIcons name='account-details' size={24} color="black" />
+                            )
+                    }
+                }
+            />
+        </Tabs>
+    )
 }
